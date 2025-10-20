@@ -14,21 +14,32 @@ import com.example.myapp.model.Author
 import androidx.compose.material.icons.filled.Person
 
 @Composable
-fun AuthorsList(authors: List<Author>) {
+fun AuthorsList(authors: List<Author>, onBack: () -> Unit = {}) {
     Column(
+
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Text(
-            text = "Авторы проекта",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+        Spacer(modifier = Modifier.height(30.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Авторы проекта",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Button(onClick = onBack) {
+                Text("Назад")
+            }
+        }
 
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(authors) { author ->

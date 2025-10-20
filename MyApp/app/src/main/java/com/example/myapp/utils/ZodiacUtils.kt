@@ -22,21 +22,21 @@ object ZodiacUtils {
         }
     }
 
-    fun getZodiacIconResource(zodiacSign: String): Int {
+    fun getZodiacIconFileName(zodiacSign: String): String {
         return when (zodiacSign) {
-            "Овен" -> android.R.drawable.star_big_on
-            "Телец" -> android.R.drawable.star_big_off
-            "Близнецы" -> android.R.drawable.ic_lock_lock
-            "Рак" -> android.R.drawable.ic_menu_camera
-            "Лев" -> android.R.drawable.ic_menu_compass
-            "Дева" -> android.R.drawable.ic_menu_help
-            "Весы" -> android.R.drawable.ic_menu_info_details
-            "Скорпион" -> android.R.drawable.ic_menu_manage
-            "Стрелец" -> android.R.drawable.ic_menu_preferences
-            "Козерог" -> android.R.drawable.ic_menu_save
-            "Водолей" -> android.R.drawable.ic_menu_share
-            "Рыбы" -> android.R.drawable.ic_menu_slideshow
-            else -> android.R.drawable.ic_menu_gallery
+            "Овен" -> "aries.png"
+            "Телец" -> "taurus.png"
+            "Близнецы" -> "gemini.png"
+            "Рак" -> "cancer.png"
+            "Лев" -> "leo.png"
+            "Дева" -> "virgo.png"
+            "Весы" -> "libra.png"
+            "Скорпион" -> "scorpio.png"
+            "Стрелец" -> "sagittarius.png"
+            "Козерог" -> "capricorn.png"
+            "Водолей" -> "aquarius.png"
+            "Рыбы" -> "pisces.png"
+            else -> "unknown.png"
         }
     }
 

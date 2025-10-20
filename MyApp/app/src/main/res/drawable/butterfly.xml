@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <!-- Тело бабочки -->
+    <path
+        android:fillColor="#4A4A4A"
+        android:pathData="M16,6 A1,10 0 0,1 16,26 A1,10 0 0,1 16,6 Z"/>
+    <!-- Левые крылья -->
+    <path
+        android:fillColor="#FF6B6B"
+        android:pathData="M8,10 A6,6 0 0,1 8,22 A6,6 0 0,1 8,10 Z"/>
+    <!-- Правые крылья -->
+    <path
+        android:fillColor="#4ECDC4"
+        android:pathData="M24,10 A6,6 0 0,1 24,22 A6,6 0 0,1 24,10 Z"/>
+    <!-- Усики -->
+    <path
+        android:fillColor="#4A4A4A"
+        android:pathData="M14,6 L12,4"/>
+    <path
+        android:fillColor="#4A4A4A"
+        android:pathData="M18,6 L20,4"/>
+</vector>

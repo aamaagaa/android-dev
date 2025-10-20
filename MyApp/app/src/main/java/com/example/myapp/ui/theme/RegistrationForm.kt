@@ -15,12 +15,16 @@ import com.example.myapp.model.Player
 import com.example.myapp.utils.ZodiacUtils
 import androidx.compose.ui.unit.sp
 import java.util.*
+import android.widget.ImageView
+import android.graphics.BitmapFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegistrationForm(
     player: Player,
-    onPlayerUpdate: (Player) -> Unit
+    onPlayerUpdate: (Player) -> Unit,
+    showContinueButton: Boolean = false,
+    onContinue: () -> Unit = {}
 ) {
     var fullName by remember { mutableStateOf(player.fullName) }
     var selectedGender by remember { mutableStateOf(player.gender) }
@@ -35,10 +39,11 @@ fun RegistrationForm(
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(30.dp))
         Text(
             text = "Регистрация игрока",
             fontSize = 20.sp,
@@ -158,7 +163,72 @@ fun RegistrationForm(
         )
 
         if (player.zodiacSign.isNotEmpty()) {
-            Text("Знак зодиака: ${player.zodiacSign}", fontWeight = FontWeight.Medium)
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Ваш знак зодиака:",
+                    fontWeight = FontWeight.Medium,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+                ZodiacSignImage(
+                    zodiacSign = player.zodiacSign,
+                    modifier = Modifier.size(80.dp)
+                )
+                Text(
+                    text = player.zodiacSign,
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+            }
+        }
+
+        if (showContinueButton) {
+            Button(
+                onClick = onContinue,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+                enabled = fullName.isNotEmpty() && selectedDate != 0L
+            ) {
+                Text("Продолжить", fontSize = 16.sp)
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
+}
+
+@Composable
+fun ZodiacSignImage(zodiacSign: String, modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+
+    val bitmap = remember(zodiacSign) {
+        try {
+            val fileName = ZodiacUtils.getZodiacIconFileName(zodiacSign)
+            val inputStream = context.assets.open("raw/$fileName")
+            BitmapFactory.decodeStream(inputStream).also {
+                inputStream.close()
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    AndroidView(
+        factory = { ctx ->
+            ImageView(ctx).apply {
+                scaleType = ImageView.ScaleType.FIT_CENTER
+            }
+        },
+        update = { imageView ->
+            if (bitmap != null) {
+                imageView.setImageBitmap(bitmap)
+            } else {
+                imageView.setImageResource(android.R.drawable.ic_menu_gallery)
+            }
+        },
+        modifier = modifier
+    )
 }

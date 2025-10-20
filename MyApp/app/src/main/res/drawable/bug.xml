@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <!-- Тело жука -->
+    <path
+        android:fillColor="#8B4513"
+        android:pathData="M16,8 A8,12 0 0,1 16,28 A8,12 0 0,1 16,8 Z"/>
+    <!-- Голова -->
+    <path
+        android:fillColor="#654321"
+        android:pathData="M16,4 A4,4 0 0,1 16,12 A4,4 0 0,1 16,4 Z"/>
+    <!-- Лапки -->
+    <path
+        android:fillColor="#654321"
+        android:pathData="M8,14 L4,12 L8,16 Z"/>
+    <path
+        android:fillColor="#654321"
+        android:pathData="M24,14 L28,12 L24,16 Z"/>
+</vector>

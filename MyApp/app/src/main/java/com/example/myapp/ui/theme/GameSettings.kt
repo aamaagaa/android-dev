@@ -14,7 +14,8 @@ import com.example.myapp.model.GameSettings
 @Composable
 fun GameSettings(
     settings: GameSettings,
-    onSettingsUpdate: (GameSettings) -> Unit
+    onSettingsUpdate: (GameSettings) -> Unit,
+    onBack: () -> Unit = {}
 ) {
     var gameSpeed by remember { mutableFloatStateOf(settings.gameSpeed) }
     var maxCockroaches by remember { mutableIntStateOf(settings.maxCockroaches) }
@@ -27,12 +28,22 @@ fun GameSettings(
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        Text(
-            text = "Настройки игры",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+        Spacer(modifier = Modifier.height(30.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Настройки игры",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Button(onClick = onBack) {
+                Text("Назад")
+            }
+        }
+        
+        Spacer(modifier = Modifier.height(16.dp))
 
         Text("Скорость игры: ${"%.1f".format(gameSpeed)}x", fontWeight = FontWeight.Medium)
         Slider(
@@ -48,7 +59,7 @@ fun GameSettings(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        Text("Макс. тараканов: $maxCockroaches", fontWeight = FontWeight.Medium)
+        Text("Макс. насекомых: $maxCockroaches", fontWeight = FontWeight.Medium)
         Slider(
             value = maxCockroaches.toFloat(),
             onValueChange = {
