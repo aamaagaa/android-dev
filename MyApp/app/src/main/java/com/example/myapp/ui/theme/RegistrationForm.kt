@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import java.util.*
 import android.widget.ImageView
 import android.graphics.BitmapFactory
+import androidx.compose.ui.graphics.Color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,6 +38,16 @@ fun RegistrationForm(
         calendar.timeInMillis = selectedDate
     }
 
+    LaunchedEffect(fullName, selectedGender, selectedCourse, difficultyLevel, selectedDate) {
+        val updatedPlayer = player.copy(
+            fullName = fullName,
+            gender = selectedGender,
+            course = selectedCourse,
+            difficultyLevel = difficultyLevel,
+            birthDate = selectedDate
+        )
+        onPlayerUpdate(updatedPlayer)
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -152,10 +163,12 @@ fun RegistrationForm(
                         selectedDate = newCalendar.timeInMillis
 
                         val zodiacSign = ZodiacUtils.getZodiacSign(dayOfMonth, month)
-                        onPlayerUpdate(player.copy(
-                            birthDate = selectedDate,
-                            zodiacSign = zodiacSign
-                        ))
+                        onPlayerUpdate(
+                            player.copy(
+                                birthDate = selectedDate,
+                                zodiacSign = zodiacSign
+                            )
+                        )
                     }
                 }
             },
